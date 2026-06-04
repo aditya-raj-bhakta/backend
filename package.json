@@ -1,0 +1,36 @@
+{
+  "name": "backend1",
+  "version": "1.0.0",
+  "description": "reddit backend ",
+  "homepage": "https://github.com/aditya-raj-bhakta/backend#readme",
+  "bugs": {
+    "url": "https://github.com/aditya-raj-bhakta/backend/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya-raj-bhakta/backend.git"
+  },
+  "license": "ISC",
+  "author": "aditya-raj-bhakta",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "npx nodemon app.js"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-errors": "^3.0.0",
+    "ajv-formats": "^3.0.1",
+    "argon2": "^0.44.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.22.2",
+    "resend": "^6.12.3"
+  },
+  "allowScripts": {
+    "argon2@0.44.0": true
+  }
+}
