@@ -28,9 +28,6 @@ const emailSchema={
 const validate=ajv.compile(emailSchema);
 const emailValidator=(email)=>{
     const valid=ajv.validate(emailSchema,email);
-    if(!valid){
-        return validate.errors;
-    }
-    return null;
+    return valid;
 }
 export{emailValidator}

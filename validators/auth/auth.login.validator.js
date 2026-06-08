@@ -54,11 +54,14 @@ const validate=ajv.compile(schema);
 
 
 
+
+
+
 const loginValidator=(req,res,next)=>{
     try{
     const {credential,password} = req.body;
     let email=emailValidator(credential);
-    if(!email){
+    if(email){
         email=credential;
         const obj={email,password}
         const valid=validate(obj);
@@ -69,17 +72,20 @@ const loginValidator=(req,res,next)=>{
             return res.status(400).send(error);
         }
         else{
+            
             return next();
         }
         
     }
     else{
+
         const username=credential;
         const obj={username,password}
         const valid=validate(obj);
         if(!valid){
            const error = [];
            validate.errors.forEach((e)=>{error.push(e)})
+           console.log(error);
             error.forEach(e=>{console.log(e.errorMessage)});
             return res.status(400).send(error);
         }
@@ -91,6 +97,5 @@ const loginValidator=(req,res,next)=>{
         catch(error){
          return res.status(401).send({message:"unathorized"});
     }
-    
 }
 export default loginValidator;

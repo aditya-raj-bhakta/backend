@@ -11,12 +11,12 @@ const logindata=async (credential,password)=>{
                 email:rows[0][0].email,
                 username:rows[0][0].username,
                 password_hash:rows[0][0].password_hash,
-                user_id:rows[0][0].user_id
+                user_id:rows[0][0].user_id,
+                profile_pic:rows[0][0].profile_pic
             }
         }
     }
     catch (error){
-        console.log(error)
         return null
     }
     

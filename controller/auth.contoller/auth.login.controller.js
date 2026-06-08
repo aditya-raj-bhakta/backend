@@ -30,9 +30,17 @@ const loginController= async (req,res)=>{
                 success:true,
                 message:"Login successful",
                 accessToken:accessToken,
+                user:{
+                    id:obj.user_id,
+                    username:obj.username,
+                    avatar:obj.profile_pic,
+                }
             })
 
         }
     }
 }
-export{loginController}
+const isLogin=(req,res)=>{
+    
+}
+export{loginController,isLogin}
