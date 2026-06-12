@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
 import {pool} from '../config/db.config.js'
-const generateAccessToken=async (username,email,sessionId)=>{
+import { env } from './env.js';
+const generateAccessToken=async (username,sessionId)=>{
     const token={
     sub: username,
-    email:email,
     sessionId: sessionId,
 }
-    return await jwt.sign(token,"secret",{
+    return await jwt.sign(token, env.SECRET, {
         expiresIn:'15m'
     })
 }
@@ -20,7 +20,8 @@ const generateRefreshToken= async (userid,metadata)=>{
     const refreshtoken= await jwt.sign({
     sub: userid,
     sessionId: sessionId,
-}, "secret", {
+
+}, env.SECRET, {
     expiresIn: '30d'
 })
     const refresh_token_hash=await crypto.createHash("sha256").update(refreshtoken).digest("hex");
@@ -31,7 +32,7 @@ const generateRefreshToken= async (userid,metadata)=>{
     const expires_at=new Date(Date.now()+30*24*60*60*1000);
     const last_used_at=new Date();
     await pool.execute(query,[sessionId,user_id,refresh_token_hash,device_name,user_agent,ip_address,created_at,expires_at,last_used_at]);
-    return [sessionId, refreshtoken];
+    return [refreshtoken, sessionId];
     
 }
 //ids should be 32 bytes long to fit in the database and to be unique

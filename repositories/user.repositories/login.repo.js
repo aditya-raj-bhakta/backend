@@ -1,8 +1,8 @@
 import { pool } from "../../config/db.config.js"
 import { loginquery } from "../../databases/queries/loginquery.js"
-const logindata=async (credential,password)=>{
+const logindata=async (credential)=>{
     try{
-        const rows=await pool.execute(loginquery,[credential,credential]);
+        const rows=await pool.execute(loginquery,[credential,credential,credential]);
         if(rows.length==0){
             return null
         }

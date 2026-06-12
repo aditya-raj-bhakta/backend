@@ -1,0 +1,12 @@
+export const logoutController=async(req,res)=>{
+   res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    path: "/"
+});
+res.status(200).json({
+    success:true,
+    message:"Logout successful"
+})
+}   
