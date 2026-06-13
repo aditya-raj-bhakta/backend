@@ -1,0 +1,2 @@
+export const signupInitiateQuery=`insert into TEMP_USERS (email,user_id,verified) values (?,?,?)`
+export const createotpQuery=`insert into OTP (id,email,otp_hash,purpose,attempts,created_at,expires_at) values (?,?,?,?,?,?,?)`
