@@ -1,12 +1,16 @@
 import { pool } from "../../config/db.config.js";
 import crypto from 'crypto';
-import { createotpQuery, signupInitiateQuery } from "../../databases/queries/signupquery.js";
+import { createotpQuery, createUsernameQuery, signupInitiateQuery } from "../../databases/queries/signupquery.js";
 export const createTempUser=async (email)=>{
     const user_id=crypto.randomUUID();
     const verified=false;
     await pool.execute(signupInitiateQuery,[email,user_id,verified]);
     
 }
+export const createUsername=async (username,password_hash,email)=>{
+    await pool.execute(createUsernameQuery,[username,password_hash,email])
+}
+
 export const createOTP=async (email,purpose)=>{
     const id=crypto.randomUUID();
     const otp=crypto.randomInt(100000,999999).toString();
@@ -15,4 +19,5 @@ export const createOTP=async (email,purpose)=>{
     const created_at=new Date();
     const expires_at=new Date(Date.now()+60*5*1000)
     await pool.execute(createotpQuery,[id,email,otp_hash,purpose,atempts,created_at,expires_at]);
+    return otp;
 }
