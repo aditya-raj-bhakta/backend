@@ -5,4 +5,5 @@ from OTP
 where otp_hash = ? 
   and email = ? 
   and verified_at is null`
-export const createUsernameQuery=`UPDATE TEMP_USER set username=?,password_hash=? where email=?`
+export const createUsernameQuery=`UPDATE TEMP_USERS set username=?,password_hash=? where email=?`
+export const verifyusernameQuery=`select username from USERS where username=?`

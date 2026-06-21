@@ -3,6 +3,9 @@ import { createOTP, createTempUser} from "../../repositories/user.repositories/s
 import { sendOtp } from "../../services/auth/auth.mail.service.js";
 import {verifyotp} from "../../services/auth/auth.verify.service.js"
 import { createhash } from "../../utils/hashing.utils.js";
+import { createUsername } from "../../repositories/user.repositories/signup.repo.js";
+import { verifyusername } from "../../repositories/user.repositories/signup.repo.js";
+import argon2 from "argon2";
 const signupInitiateController=async (req,res)=>{
     const email=req.body.email;
         await createTempUser(email)
@@ -37,17 +40,19 @@ const signupUsernameController=async(req,res)=>{
     const username=req.body.username;
     const email=req.body.email;
     const password=req.body.password;
-    const password_hash= await createhash(password);
+    const password_hash= await argon2.hash(password);
     const isValid=await verifyusername(username);
     if(isValid){
         await createUsername(username,password_hash,email)
         res.send({
             success:true,
+            message:"username created"
         })
     }
     else{
         res.send({
-            success:false
+            success:false,
+            message:"username already exists"
         })
     }
 }

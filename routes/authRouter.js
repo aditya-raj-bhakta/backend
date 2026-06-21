@@ -8,6 +8,7 @@ authRouter.post("/login",[loginValidator,loginController])
 authRouter.post("/signup/initiate",signupInitiateController)
 authRouter.post("/signup/verify",signupVerifyController)
 authRouter.post("/signup/username",signupUsernameController)
+
 // authRouter.post("/signup/complete")
 // authRouter.post("/signup/resend")
 authRouter.get("/logout",logoutController)
